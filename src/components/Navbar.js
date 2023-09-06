@@ -57,12 +57,17 @@ const Navbar = () => {
                 placeholder="Search"
                 aria-label="Search"
               />
-              <button className="btn btn-outline-success" type="submit">
-                Search
-              </button>
             </form>
-            <Link to="/login" className=" btn btn-primary my-2 " role="button" >Login</Link>
-            <Link to="/singup" className="btn btn-primary my-2 mx-2 " role="button" >Sing Up</Link>
+            <Link to="/login" className=" btn btn-primary my-2 " role="button">
+              Login
+            </Link>
+            <Link
+              to="/singup"
+              className="btn btn-primary my-2 mx-2 "
+              role="button"
+            >
+              Sign Up
+            </Link>
           </div>
         </div>
       </nav>

@@ -1,10 +1,9 @@
 import React from "react";
 import { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-    let navigate = useNavigate()
-
+  let navigate = useNavigate();
 
   const [credentials, setCredentials] = useState({ email: "", password: "" });
 
@@ -25,11 +24,11 @@ const Login = () => {
     });
     const json = await response.json();
     console.log(json);
-    if(json.success){
-        localStorage.setItem('token',json.id)
-        navigate('/');
-    }else{
-        alert("invalid information")
+    if (json.success) {
+      localStorage.setItem("token", json.id);
+      navigate("/");
+    } else {
+      alert("invalid information");
     }
   };
   return (

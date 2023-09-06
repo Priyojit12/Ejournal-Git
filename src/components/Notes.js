@@ -38,7 +38,7 @@ function Notes() {
   };
 
   return (
-    <>
+    <div className="container">
       {/* <AddNote /> */}
       <button
         ref={ref}
@@ -148,7 +148,7 @@ function Notes() {
           );
         })}
       </div>
-    </>
+    </div>
   );
 }
 

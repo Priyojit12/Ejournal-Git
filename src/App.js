@@ -20,7 +20,7 @@ function App() {
               <Route exact path="/" element={<Home />} />
               <Route exact path="/about" element={<About />} />
               <Route exact path="/login" element={<Login />} />
-              <Route exact path="/signup" element={<SingUp />} />
+              <Route exact path="/singup" element={<SingUp />} />
             </Routes>
           </div>
         </NoteState>
