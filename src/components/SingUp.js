@@ -2,37 +2,49 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const SingUp = () => {
+const SingUp = (props) => {
   let navigate = useNavigate();
 
-  const [credentials, setCredentials] = useState({name:"", email: "", password: "" ,cpassword:""});
+  const [credentials, setCredentials] = useState({
+    name: "",
+    email: "",
+    password: "",
+    cpassword: "",
+  });
 
   const onChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:5000/api/auth/userLogin", {
+    const { name, email, password } = credentials;
+
+    const response = await fetch("http://localhost:5000/api/auth/createuser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: credentials.email,
-        password: credentials.password,
+        name,
+        email,
+        password,
       }),
     });
+
     const json = await response.json();
     console.log(json);
     if (json.success) {
       localStorage.setItem("token", json.id);
       navigate("/");
+      props.showAlert("Account created successfully", "success")
     } else {
-      alert("invalid information");
+      props.showAlert("Invalid information", "danger")
     }
   };
+
   return (
-    <div className="container" >
+    <div className="container">
       <form onSubmit={handleSubmit}>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">
@@ -73,6 +85,8 @@ const SingUp = () => {
             id="password"
             name="password"
             onChange={onChange}
+            minLength={5}
+            required
           />
         </div>
         <div class="mb-3">
@@ -85,6 +99,8 @@ const SingUp = () => {
             id="cpassword"
             name="cpassword"
             onChange={onChange}
+            minLength={5}
+            required
           />
         </div>
         <button type="submit" class="btn btn-primary">

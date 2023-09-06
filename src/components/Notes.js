@@ -1,13 +1,22 @@
 import { React, useContext, useEffect, useRef, useState } from "react";
 import noteContext from "../context/notes/NoteContext";
 import NoteItem from "./NoteItem";
+import AddNote from "./AddNote";
+import { useNavigate } from "react-router-dom";
 
-function Notes() {
+function Notes(props) {
   const context = useContext(noteContext);
+  let navigate = useNavigate();
   const { notes, getAllNotes, editNote } = context;
   useEffect(() => {
-    getAllNotes();
-  });
+    if (localStorage.getItem("token")) {
+      getAllNotes();
+    } else {
+      navigate("/login");
+    }
+    // eslint-disable-next-line
+  },[]);
+
   const ref = useRef(null);
   const refClose = useRef(null);
 
@@ -31,6 +40,7 @@ function Notes() {
     e.preventDefault();
     editNote(note.id, note.etitle, note.edescription, note.etag);
     refClose.current.click();
+    props.showAlert("Note edited", "success");
   };
 
   const onChange = (e) => {
@@ -39,7 +49,8 @@ function Notes() {
 
   return (
     <div className="container">
-      {/* <AddNote /> */}
+      <AddNote showAlert={props.showAlert} />
+      <hr className="solid" />
       <button
         ref={ref}
         type="button"
@@ -57,7 +68,7 @@ function Notes() {
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog">
+        <div className="modal-dialog modal-dialog-centered container">
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-etitle" id="exampleModalLabel">
@@ -131,7 +142,9 @@ function Notes() {
                 type="button"
                 onClick={handleClick}
                 className="btn btn-primary"
-                disabled={note.etitle.length<2||note.edescription.length<5}
+                disabled={
+                  note.etitle.length < 2 || note.edescription.length < 5
+                }
               >
                 Edit notes
               </button>
@@ -144,7 +157,12 @@ function Notes() {
         <h1>Your notes</h1>
         {notes.map((note) => {
           return (
-            <NoteItem key={note.key} updateNote={updateNote} note={note} />
+            <NoteItem
+              key={note.key}
+              updateNote={updateNote}
+              note={note}
+              showAlert={props.showAlert}
+            />
           );
         })}
       </div>

@@ -15,19 +15,22 @@ router.post(
     body("password", "pass is not long enough").isLength({ min: 5 }),
   ],
   async (req, res) => {
+    let success = false;
+
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({ success,errors: errors.array() });
     }
     try {
       let user = await User.findOne({ email: req.body.email });
       if (user) {
         return res
           .status(400)
-          .json({ error: "Sorry a user with this email already exists" });
+          .json({success, error: "Sorry a user with this email already exists" });
       }
       const salt = await bcrypt.genSalt(10);
       const secPassword = await bcrypt.hash(req.body.password, salt);
+
       user = await User.create({
         name: req.body.name,
         password: secPassword,
@@ -37,12 +40,12 @@ router.post(
       const data = {
         user: { id: user.id },
       };
+
       const authToken = jwt.sign(data, JWT_secret);
-      res.json({ id: authToken });
+      res.json({authToken });
     } catch (error) {
       console.error(error.message);
       res.status(500).send("Send error occured");
-      success = false;
     }
   }
 );
@@ -61,8 +64,8 @@ router.post(
     }
     const { email, password } = req.body;
 
-    let user = await User.findOne({ email });
     try {
+      let user = await User.findOne({ email });
       if (!user) {
         return res.status(400).json({success, error: "Please Enter correct email" });
       }
@@ -76,7 +79,7 @@ router.post(
       };
       const authToken = jwt.sign(data, JWT_secret);
       success = true;
-      res.json({success, id: authToken });
+      res.json({success,authToken });
     } catch (error) {
       console.error(error.message);
       res.status(500).send("Some error occured");

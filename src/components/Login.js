@@ -1,8 +1,8 @@
 import React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,Link} from "react-router-dom";
 
-const Login = () => {
+const Login = (props) => {
   let navigate = useNavigate();
 
   const [credentials, setCredentials] = useState({ email: "", password: "" });
@@ -25,10 +25,11 @@ const Login = () => {
     const json = await response.json();
     console.log(json);
     if (json.success) {
-      localStorage.setItem("token", json.id);
+      localStorage.setItem("token", json.authToken);
       navigate("/");
+      props.showAlert("Loged in successfully", "success");
     } else {
-      alert("invalid information");
+      props.showAlert("Account not signed in", "danger");
     }
   };
   return (
@@ -72,6 +73,12 @@ const Login = () => {
         <button type="submit" className="btn btn-primary">
           Submit
         </button>
+        <div className="row">
+        <h6 className="my-2 text-center">Or create your Account</h6>
+        <Link to="/singup" className="btn btn-primary  " role="button">
+          Sign Up
+        </Link>
+        </div>
       </form>
     </div>
   );
