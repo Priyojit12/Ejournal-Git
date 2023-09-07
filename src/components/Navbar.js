@@ -7,7 +7,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate('/login')
+    navigate("/login");
   };
 
   useEffect(() => {
@@ -82,8 +82,8 @@ const Navbar = () => {
                 </Link>
               </form>
             ) : (
-              <button onClick={handleLogout} className="btn btn-primary my-3">
-                Logout
+              <button onClick={handleLogout}  className="btn btn-primary my-3">
+                Logout 
               </button>
             )}
           </div>

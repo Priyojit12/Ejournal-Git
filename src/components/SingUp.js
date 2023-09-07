@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+
 
 const SingUp = (props) => {
   let navigate = useNavigate();
@@ -20,7 +22,7 @@ const SingUp = (props) => {
     e.preventDefault();
     const { name, email, password } = credentials;
 
-    const response = await fetch("http://localhost:5000/api/auth/createuser", {
+    const response = await fetch(`${BASE_URL}/api/auth/createuser`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

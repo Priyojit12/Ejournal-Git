@@ -41,6 +41,7 @@ function App() {
                 path="/singup"
                 element={<SingUp showAlert={showAlert} />}
               />
+              
             </Routes>
           </div>
         </NoteState>

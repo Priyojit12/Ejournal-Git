@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate ,Link} from "react-router-dom";
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const Login = (props) => {
   let navigate = useNavigate();
@@ -12,7 +13,7 @@ const Login = (props) => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:5000/api/auth/userLogin", {
+    const response = await fetch(`${BASE_URL}/api/auth/userLogin`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -71,7 +72,7 @@ const Login = (props) => {
           </label>
         </div>
         <button type="submit" className="btn btn-primary">
-          Submit
+          login
         </button>
         <div className="row">
         <h6 className="my-2 text-center">Or create your Account</h6>

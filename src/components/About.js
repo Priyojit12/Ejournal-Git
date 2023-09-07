@@ -17,8 +17,7 @@ const About = () => {
             <h2 className="display-3 fw-bold lh-1">Priyojit Das</h2>
             <p className="text-secondary fs-4 mb-2">Frontend Developer / backend</p>
             <hr className="w-25 mx-auto ms-md-0 mb-4 text-secondary"/>
-            <p>Nam sit amet condimentum arcu. Vestibulum non convallis elit, nec finibus purus. Morbi a tortor vitae mauris volutpat lacinia in vel leo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam vel dictum nisi.</p>
-            <p>Duis bibendum lectus vitae posuere euismod. Nunc semper mauris sed justo consequat mollis. Suspendisse eu lectus ornare, pulvinar tortor eget, iaculis libero. Nullam non metus sed lacus luctus posuere. Morbi semper pharetra tortor sit amet mollis.</p>
+            <p>Seven billion people are on this Earth, and everybody is different from the rest of others. There is nothing without purpose in this world. Everything has some purpose. Humans are the best creation, and each person is exclusive. Thus, writing about myself, I’m here to express myself that what I see, what I experience and what I plan for my life. I try myself to be modest, passionate, devoted, hardworking and honest.</p>
           </div>
         </div>
         <div className="col-12 order-md-0 col-md-4 col-xxl-4">
