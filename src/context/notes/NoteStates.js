@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import noteContext from "./NoteContext";
-const host = process.env.REACT_APP_BASE_URL;
+const host = process.env.PORT||process.env.REACT_APP_BASE_URL;
 
 console.log(host)
 
